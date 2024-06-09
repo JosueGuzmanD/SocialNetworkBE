@@ -9,7 +9,9 @@ public class MappingProfile : Profile
     public MappingProfile()
     {
         CreateMap<User, UserDto>().ReverseMap();
-        CreateMap<User, CreateUserDto>().ReverseMap();
+        CreateMap<User, CreateUserDto>().ReverseMap()
+        .ForMember(dest => dest.Id, opt => opt.Ignore());    
         CreateMap<User, UpdateUserDto>().ReverseMap();
+        CreateMap<FriendshipRequestDto,Friendship>().ReverseMap();
     }
 }

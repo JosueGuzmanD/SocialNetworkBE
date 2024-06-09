@@ -1,7 +1,8 @@
 using Microsoft.EntityFrameworkCore;
+using SocialNetworkBE.Application;
 using SocialNetworkBE.Application.Interfaces;
 using SocialNetworkBE.Application.Services;
-using SocialNetworkBE.Domain;
+using SocialNetworkBE.Domain.Repositories;
 using SocialNetworkBE.Infrastructure;
 using SocialNetworkBE.Infrastructure.Repositories;
 
@@ -13,9 +14,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<SocialNetworkDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IUserServices, UserService>();
+
+builder.Services.AddApplicationServices();
+builder.Services.AddInfrastructureServices(builder.Configuration);
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
