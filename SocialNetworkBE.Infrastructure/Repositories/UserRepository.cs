@@ -4,14 +4,14 @@ using SocialNetworkBE.Domain.Repositories;
 
 namespace SocialNetworkBE.Infrastructure.Repositories;
 
-public class UserRepository : GenericRepository<User>, IUserRepository
+public class UserRepository : GenericRepository<Player>, IUserRepository
 {
     public UserRepository(SocialNetworkDbContext context):base(context)
     {
         
     }
 
-    public async Task<User> GetByEmailAsync(string email)
+    public async Task<Player> GetByEmailAsync(string email)
     {
     return  await _context.Users.FirstOrDefaultAsync(x => x.Email == email);
     }

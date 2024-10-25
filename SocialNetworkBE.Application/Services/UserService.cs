@@ -31,7 +31,7 @@ public class UserService : IUserServices
 
     public async Task<UserDto> CreateAsync(CreateUserDto userDto)
     {
-        var user = _mapper.Map<User>(userDto);
+        var user = _mapper.Map<Player>(userDto);
         user.Id = Guid.NewGuid();
         user.UserGuid = Guid.NewGuid();
         user.creationDate = DateTime.UtcNow;

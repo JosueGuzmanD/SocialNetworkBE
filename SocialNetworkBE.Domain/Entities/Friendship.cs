@@ -10,7 +10,7 @@ public class Friendship
 
     public FriendshipStatus Status { get; set; }
 
-    public User User1 { get; set; }
-    public User User2 { get; set; }
+    public Player User1 { get; set; }
+    public Player User2 { get; set; }
 
 }

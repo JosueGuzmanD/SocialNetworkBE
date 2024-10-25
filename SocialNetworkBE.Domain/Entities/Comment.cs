@@ -9,7 +9,7 @@ public class Comment
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
 
-    public User User { get; set; }
+    public Player User { get; set; }
     public Post Post { get; set; }
     public IEnumerable<Reaction> Reactions { get; set; }
 }

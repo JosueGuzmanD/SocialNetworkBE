@@ -9,6 +9,7 @@ namespace SocialNetworkBE.Api.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserServices _userService;
+        
 
         public UserController(IUserServices userService)
         {

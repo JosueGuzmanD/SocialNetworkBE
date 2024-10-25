@@ -11,6 +11,6 @@ public class Notification
     public DateTime CreatedAt { get; set; }
     public bool IsRead { get; set; }
 
-    public User User { get; set; }
+    public Player User { get; set; }
 
 }

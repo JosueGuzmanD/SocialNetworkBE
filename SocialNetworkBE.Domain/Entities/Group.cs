@@ -9,6 +9,6 @@ public class Group
     public DateTime CreatedDate { get; set; }
     public DateTime UpdatedDate { get; set;}
 
-    public User Creator { get; set; }
+    public Player Creator { get; set; }
     public ICollection<GroupMembership> GroupMemberships { get; set; }
 }

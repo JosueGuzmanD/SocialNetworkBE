@@ -1,17 +1,19 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using SocialNetworkBE.Domain.Entities;
 using SocialNetworkBE.Infrastructure.Configurations;
 using SocialNetworkBE.Infrastructure.EntityTypeConfigurations;
 
 namespace SocialNetworkBE.Infrastructure
 {
-    public class SocialNetworkDbContext : DbContext
+    public class SocialNetworkDbContext : IdentityDbContext<ApplicationUser, IdentityRole, string>
     {
         public SocialNetworkDbContext(DbContextOptions<SocialNetworkDbContext> options) : base(options)
         {
 
         }
-        public DbSet<User> Users { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Friendship> Friendships { get; set; }
@@ -23,6 +25,9 @@ namespace SocialNetworkBE.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
+
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new PostConfiguration());
             modelBuilder.ApplyConfiguration(new CommentConfiguration());

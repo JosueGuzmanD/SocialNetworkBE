@@ -2,7 +2,7 @@
 
 namespace SocialNetworkBE.Domain.Repositories;
 
-public interface IUserRepository: IGenericRepository<User>
+public interface IUserRepository: IGenericRepository<Player>
 { 
-    Task<User> GetByEmailAsync(string email);
+    Task<Player> GetByEmailAsync(string email);
 }

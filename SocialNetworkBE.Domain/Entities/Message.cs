@@ -8,8 +8,8 @@ public class Message
     public string Content { get; set; }
     public DateTime CreatedAt { get; set; }
 
-    public User Sender { get; set; }
-    public User Receiver { get; set; }
+    public Player Sender { get; set; }
+    public Player Receiver { get; set; }
 
 
 }
