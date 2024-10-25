@@ -1,7 +1,10 @@
 # Proyecto: Red Social de Fútbol
 
 ## Descripción
-Una red social centrada en la organización de partidos de fútbol. Los jugadores pueden organizar partidos, reservar campos, crear equipos, publicar resultados y mucho más.
+
+Esta red social está centrada en la organización y gestión de partidos de fútbol. Los jugadores pueden crear perfiles, formar equipos, organizar partidos, reservar campos de fútbol, interactuar entre ellos a través de publicaciones y comentarios, y consultar estadísticas personales y de sus equipos.
+
+El sistema sigue los principios de Domain-Driven Design (DDD), donde el dominio del fútbol está bien representado mediante entidades, Value Objects, y servicios de dominio que gestionan la lógica de negocio. El sistema también implementa patrones como agregados para gestionar entidades relacionadas y Value Objects para encapsular comportamientos y valores inmutables.
 
 ## Stack Tecnológico
 - **Back-end**: .NET 8 (ASP.NET Core)
