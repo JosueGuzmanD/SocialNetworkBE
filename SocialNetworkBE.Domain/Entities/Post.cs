@@ -2,11 +2,10 @@
 
 namespace SocialNetworkBE.Domain.Entities;
 
-public class Post
+public class Post :BaseEntity
 {
     public string Content { get; set; }
     public Player CreatedBy { get; set; }  
-    public DateTime CreatedAt { get; set; }
     public List<Comment> Comments { get; set; }
     public List<Reaction> Reactions { get; set; }
 

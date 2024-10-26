@@ -15,11 +15,4 @@ public class Player : BaseEntity
     public UserStats Stats { get; private set; } = new UserStats();  
 
 
-    public ICollection<Friendship> Friendships { get; set; }
-    public ICollection<GroupMembership> GroupMemberships { get; set; }
-    public ICollection<Notification> Notifications { get; set; }
-    public ICollection<Message> SentMessages { get; set; }
-    public ICollection<Message> ReceivedMessages { get; set; }
-
-
 }
