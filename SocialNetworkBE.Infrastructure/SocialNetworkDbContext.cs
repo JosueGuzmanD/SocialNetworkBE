@@ -14,28 +14,23 @@ namespace SocialNetworkBE.Infrastructure
         {
 
         }
-        public DbSet<Post> Posts { get; set; }
+
+        public DbSet<Player> Players { get; set; }
+        public DbSet<Booking> Bookings { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<FootballField> FootballFields { get; set; }
         public DbSet<Friendship> Friendships { get; set; }
+        public DbSet<Match> Matches { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<Notification> Notifications { get; set; }
-        public DbSet<Group> Groups { get; set; }
-        public DbSet<GroupMembership> GroupMemberships { get; set; }
+        public DbSet<Post> Posts { get; set; }
         public DbSet<Reaction> Reactions { get; set; }
+        public DbSet<Team> Teams { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(SocialNetworkDbContext).Assembly);
             base.OnModelCreating(modelBuilder);
-
-
-            modelBuilder.ApplyConfiguration(new UserConfiguration());
-            modelBuilder.ApplyConfiguration(new PostConfiguration());
-            modelBuilder.ApplyConfiguration(new CommentConfiguration());
-            modelBuilder.ApplyConfiguration(new FriendshipConfiguration());
-            modelBuilder.ApplyConfiguration(new NotificationConfiguration());
-            modelBuilder.ApplyConfiguration(new GroupConfiguration());
-            modelBuilder.ApplyConfiguration(new GroupMembershipConfiguration());
-            modelBuilder.ApplyConfiguration(new ReactionConfiguration());
         }
 
     }

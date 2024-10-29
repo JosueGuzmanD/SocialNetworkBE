@@ -2,10 +2,10 @@
 
 public abstract class BaseEntity
 {
-    Guid Id { get; set; }
-    DateTime CreationDate { get; set; }
-    DateTime UpdatedDate { get; set; }
-    bool IsDeleted { get; set; }
+    public Guid Id { get; set; }
+    public DateTime CreationDate { get; set; }
+    public DateTime UpdatedDate { get; set; }
+    public bool IsDeleted { get; set; }
 
     protected BaseEntity()
     {

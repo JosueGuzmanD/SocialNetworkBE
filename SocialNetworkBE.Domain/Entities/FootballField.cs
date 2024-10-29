@@ -13,5 +13,6 @@ public class FootballField : BaseEntity
     public decimal PricePerHour { get; set; }
     public string ImageUrl { get; set; }
     public List<Booking> Bookings { get; set; }= new List<Booking>();
+    public List<Match> Matches { get; set; } = new List<Match>();
 }
 
