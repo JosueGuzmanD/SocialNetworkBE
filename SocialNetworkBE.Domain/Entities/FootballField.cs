@@ -10,7 +10,7 @@ public class FootballField : BaseEntity
     public Address Address { get; set; }
     public FieldType FieldType { get; set; }
     public FieldCapacity FieldCapacity { get; set; }
-    public decimal PricePerHour { get; set; }
+    public double PricePerHour { get; set; }
     public string ImageUrl { get; set; }
     public List<Booking> Bookings { get; set; }= new List<Booking>();
     public List<Match> Matches { get; set; } = new List<Match>();
