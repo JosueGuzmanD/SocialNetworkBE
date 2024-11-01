@@ -2,7 +2,7 @@
 
 namespace SocialNetworkBE.Domain.Entities;
 
-public class Reaction
+public class Reaction : BaseEntity
 {
     public ReactionType Type { get; set; }
     public DateTime CreatedAt { get; set; }

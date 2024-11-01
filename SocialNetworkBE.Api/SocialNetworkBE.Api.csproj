@@ -21,6 +21,10 @@
 		<ProjectReference Include="..\SocialNetworkBE.Application\SocialNetworkBE.Application.csproj" />
 
 	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Controllers\" />
+	</ItemGroup>
 	
 	
 	

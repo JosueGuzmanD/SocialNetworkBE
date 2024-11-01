@@ -15,4 +15,11 @@
     <ProjectReference Include="..\SocialNetworkBE.Domain\SocialNetworkBE.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DTOs\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="Mapping\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+
 </Project>

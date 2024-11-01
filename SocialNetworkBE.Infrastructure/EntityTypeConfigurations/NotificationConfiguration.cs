@@ -14,8 +14,7 @@ public class NotificationConfiguration : IEntityTypeConfiguration<Notification>
 
         builder.HasOne(x=>x.User)
             .WithMany(x=>x.Notifications)
-            .HasForeignKey(x=>x.UserId);
-
+            .HasForeignKey("UserId");
         
     }
 }

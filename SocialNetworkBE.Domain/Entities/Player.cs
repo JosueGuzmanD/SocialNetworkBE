@@ -15,8 +15,8 @@ public class Player : BaseEntity
     public List<Positions> Positions { get; set; } = new();
     public List<Booking> Bookings { get; set; } = new();
     public List<Comment> Comments { get; set; } = new();
+    public List<Notification> Notifications { get; set; } = new();
     public List<Post> Posts { get; set; } = new();
-    public UserStats Stats { get; private set; } = new UserStats();  
-
-
+    public List<Reaction> Reactions { get; set; } = new();
+    public PlayerStats Stats { get; private set; } = new PlayerStats();
 }

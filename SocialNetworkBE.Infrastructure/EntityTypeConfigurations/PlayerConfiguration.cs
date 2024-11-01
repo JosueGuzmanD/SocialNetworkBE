@@ -18,8 +18,20 @@ namespace SocialNetworkBE.Infrastructure.Configurations
                 .IsRequired()
                 .HasMaxLength(150);
 
-            builder.OwnsOne(p => p.Stats);
-
+            builder.OwnsOne(p => p.Stats, statsBuilder =>
+            {
+                statsBuilder.Property(s => s.TotalMatchesPlayed)
+                    .IsRequired()
+                    .HasDefaultValue(0);
+                
+                statsBuilder.Property(s => s.GoalsScored)
+                    .IsRequired()
+                    .HasDefaultValue(0);
+                
+                statsBuilder.Property(s => s.Wins)
+                    .IsRequired()
+                    .HasDefaultValue(0);
+            });
         }
     }
 }

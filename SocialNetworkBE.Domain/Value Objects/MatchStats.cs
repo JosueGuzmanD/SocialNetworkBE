@@ -6,8 +6,7 @@ public class MatchStats
 {
     public int GoalsTeamA { get; private set; }
     public int GoalsTeamB { get; private set; }
-    public List<Player> ScorersTeamA { get; private set; } = new List<Player>();
-    public List<Player> ScorersTeamB { get; private set; } = new List<Player>();
+    public List<Scorer> Scorers { get; private set; } = new List<Scorer>();
 
     public MatchStats(int goalsTeamA = 0, int goalsTeamB = 0)
     {
@@ -15,15 +14,16 @@ public class MatchStats
         GoalsTeamB = goalsTeamB;
     }
 
-    public void AddGoalForTeamA(Player player)
+    public void AddGoalForTeamA(Guid playerId)
     {
         GoalsTeamA++;
-        ScorersTeamA.Add(player);
+        Scorers.Add(new Scorer { PlayerId = playerId, IsTeamA = true });
     }
 
-    public void AddGoalForTeamB(Player player)
+    public void AddGoalForTeamB(Guid playerId)
     {
         GoalsTeamB++;
-        ScorersTeamB.Add(player);
+        Scorers.Add(new Scorer { PlayerId = playerId, IsTeamA = false });
     }
+    
 }

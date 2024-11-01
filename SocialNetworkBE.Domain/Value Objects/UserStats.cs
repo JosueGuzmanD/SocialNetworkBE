@@ -1,30 +1,30 @@
 ﻿namespace SocialNetworkBE.Domain.Value_Objects;
 
-public class UserStats
+public class PlayerStats
 {
     public int TotalMatchesPlayed { get; private set; }
     public int GoalsScored { get; private set; }
     public int Wins { get; private set; }
 
-    public UserStats(int totalMatchesPlayed = 0, int goalsScored = 0, int wins = 0)
+    public PlayerStats(int totalMatchesPlayed = 0, int goalsScored = 0, int wins = 0)
     {
         TotalMatchesPlayed = totalMatchesPlayed;
         GoalsScored = goalsScored;
         Wins = wins;
     }
 
-    public UserStats AddMatchPlayed()
+    public PlayerStats AddMatchPlayed()
     {
-        return new UserStats(TotalMatchesPlayed + 1, GoalsScored, Wins);
+        return new PlayerStats(TotalMatchesPlayed + 1, GoalsScored, Wins);
     }
 
-    public UserStats AddGoalScored()
+    public PlayerStats AddGoalScored()
     {
-        return new UserStats(TotalMatchesPlayed, GoalsScored + 1, Wins);
+        return new PlayerStats(TotalMatchesPlayed, GoalsScored + 1, Wins);
     }
 
-    public UserStats AddWin()
+    public PlayerStats AddWin()
     {
-        return new UserStats(TotalMatchesPlayed, GoalsScored, Wins + 1);
+        return new PlayerStats(TotalMatchesPlayed, GoalsScored, Wins + 1);
     }
 }

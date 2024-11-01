@@ -1,6 +1,5 @@
 ﻿using SocialNetworkBE.Domain.Enums;
 using SocialNetworkBE.Domain.Value_Objects;
-using System.Collections.Generic;
 
 namespace SocialNetworkBE.Domain.Entities;
 

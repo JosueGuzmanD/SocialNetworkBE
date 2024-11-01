@@ -11,11 +11,12 @@ public class CommentConfiguration : IEntityTypeConfiguration<Comment>
         builder.HasKey(e => e.Id);
 
         builder.Property(c => c.Content).IsRequired();
-
-        builder.HasMany(x => x.Reactions)
-            .WithOne(x => x.Comment)
-            .HasForeignKey("ReactionId");
-
+        
+        builder.HasMany(c => c.Reactions)
+            .WithOne(r => r.Comment)
+            .HasForeignKey("CommentId") 
+            .OnDelete(DeleteBehavior.Restrict);
+        
         builder.HasOne(u => u.Player)
             .WithMany(c => c.Comments)
             .HasForeignKey("PlayerId")

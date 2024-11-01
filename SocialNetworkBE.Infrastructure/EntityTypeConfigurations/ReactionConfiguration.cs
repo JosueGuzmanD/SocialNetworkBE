@@ -12,15 +12,16 @@ public class ReactionConfiguration : IEntityTypeConfiguration<Reaction>
 
         builder.HasOne(x => x.User)
             .WithMany(x => x.Reactions)
-            .HasForeignKey(x => x.UserId);
+            .HasForeignKey("UserId")
+            .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasOne(x => x.Post)
             .WithMany(x => x.Reactions)
-            .HasForeignKey(x => x.UserId);
+            .HasForeignKey("PostId");
 
         builder.HasOne(x => x.Comment)
             .WithMany(x => x.Reactions)
-            .HasForeignKey(x => x.UserId);
+            .HasForeignKey("CommentId");
 
     }
 }
