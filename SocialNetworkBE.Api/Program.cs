@@ -3,6 +3,8 @@ using SocialNetworkBE.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
 // Add services to the container.
 
 builder.Services.AddControllers();
