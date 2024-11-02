@@ -4,7 +4,7 @@ using SocialNetworkBE.Domain.Entities;
 
 namespace SocialNetworkBE.Infrastructure.EntityTypeConfigurations;
 
-public class MatchConfiguration: IEntityTypeConfiguration<Match>
+public class MatchConfiguration : IEntityTypeConfiguration<Match>
 {
     public void Configure(EntityTypeBuilder<Match> builder)
     {
@@ -20,7 +20,7 @@ public class MatchConfiguration: IEntityTypeConfiguration<Match>
             matchDuration.Property(x => x.ExtraTime);
             matchDuration.Property(x => x.TotalTime).IsRequired();
         });
-        
+
         builder.OwnsOne(m => m.Stats, stats =>
         {
             stats.Property(s => s.GoalsTeamA).IsRequired();
@@ -32,21 +32,20 @@ public class MatchConfiguration: IEntityTypeConfiguration<Match>
                 scorer.HasKey(s => s.Id);
                 scorer.Property(s => s.PlayerId).IsRequired();
                 scorer.Property(s => s.IsTeamA).IsRequired();
-                scorer.WithOwner().HasForeignKey("MatchId"); 
+                scorer.WithOwner().HasForeignKey("MatchId");
             });
         });
-        
-        builder.HasOne(m=>m.FootballField)
-            .WithMany(f=> f.Matches)
+
+        builder.HasOne(m => m.FootballField)
+            .WithMany(f => f.Matches)
             .HasForeignKey("FootballFieldId")
             .OnDelete(DeleteBehavior.Restrict);
-        
-        builder.Property(m=> m.Status).IsRequired();
-        
-        builder.HasOne(m=>m.CreatedBy)
-            .WithMany(p=>p.CreatedMatches)
+
+        builder.Property(m => m.Status).IsRequired();
+
+        builder.HasOne(m => m.CreatedBy)
+            .WithMany(p => p.CreatedMatches)
             .HasForeignKey("PlayerId")
             .OnDelete(DeleteBehavior.Restrict);
-        
     }
 }

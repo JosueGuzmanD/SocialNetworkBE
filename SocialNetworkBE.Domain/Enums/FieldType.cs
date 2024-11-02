@@ -1,5 +1,4 @@
-﻿
-namespace SocialNetworkBE.Domain.Enums;
+﻿namespace SocialNetworkBE.Domain.Enums;
 
 public enum FieldType
 {

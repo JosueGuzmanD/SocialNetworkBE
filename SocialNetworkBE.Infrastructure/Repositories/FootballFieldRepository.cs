@@ -5,7 +5,7 @@ using SocialNetworkBE.Domain.Repositories;
 
 namespace SocialNetworkBE.Infrastructure.Repositories;
 
-public class FootballFieldRepository :GenericRepository<FootballField>, IFootballFieldRepository
+public class FootballFieldRepository : GenericRepository<FootballField>, IFootballFieldRepository
 {
     public FootballFieldRepository(SocialNetworkDbContext context) : base(context)
     {
@@ -13,12 +13,13 @@ public class FootballFieldRepository :GenericRepository<FootballField>, IFootbal
 
     public async Task<IEnumerable<FootballField>> SearchByNameAsync(string name)
     {
-       return await _context.FootballFields
+        return await _context.FootballFields
             .Where(f => f.Name.Contains(name))
             .ToListAsync();
     }
 
-    public async Task<IEnumerable<FootballField>> GetByTypeAndCapacityAsync(FieldType? fieldType = null, FieldCapacity? fieldCapacity = null)
+    public async Task<IEnumerable<FootballField>> GetByTypeAndCapacityAsync(FieldType? fieldType = null,
+        FieldCapacity? fieldCapacity = null)
     {
         return await _context.FootballFields
             .Where(f => f.FieldType == fieldType && f.FieldCapacity == fieldCapacity)
@@ -43,7 +44,8 @@ public class FootballFieldRepository :GenericRepository<FootballField>, IFootbal
     {
         return await _context.FootballFields
             .Where(f => f.Address.PostalCode == postalCode)
-            .ToListAsync();    }
+            .ToListAsync();
+    }
 
     public async Task<IEnumerable<FootballField>> GetAvailableFieldsByDateAsync(DateTime date)
     {

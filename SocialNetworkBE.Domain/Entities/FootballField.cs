@@ -1,5 +1,4 @@
-﻿
-using SocialNetworkBE.Domain.Enums;
+﻿using SocialNetworkBE.Domain.Enums;
 using SocialNetworkBE.Domain.Value_Objects;
 
 namespace SocialNetworkBE.Domain.Entities;
@@ -12,7 +11,6 @@ public class FootballField : BaseEntity
     public FieldCapacity FieldCapacity { get; set; }
     public double PricePerHour { get; set; }
     public string ImageUrl { get; set; }
-    public List<Booking> Bookings { get; set; }= new List<Booking>();
-    public List<Match> Matches { get; set; } = new List<Match>();
+    public List<Booking> Bookings { get; set; } = new();
+    public List<Match> Matches { get; set; } = new();
 }
-

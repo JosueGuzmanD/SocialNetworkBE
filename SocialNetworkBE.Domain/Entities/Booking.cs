@@ -10,5 +10,4 @@ public class Booking : BaseEntity
     public decimal TotalPrice { get; set; }
     public Player ReservedBy { get; set; }
     public BookingStatus Status { get; set; }
-   
 }

@@ -6,4 +6,3 @@ public enum FieldCapacity
     Seven,
     Five
 }
-

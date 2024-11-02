@@ -22,6 +22,5 @@ public class ReactionConfiguration : IEntityTypeConfiguration<Reaction>
         builder.HasOne(x => x.Comment)
             .WithMany(x => x.Reactions)
             .HasForeignKey("CommentId");
-
     }
 }

@@ -10,11 +10,10 @@ public class NotificationConfiguration : IEntityTypeConfiguration<Notification>
     {
         builder.HasKey(x => x.Id);
 
-        builder.Property(x=>x.Content).IsRequired();
+        builder.Property(x => x.Content).IsRequired();
 
-        builder.HasOne(x=>x.User)
-            .WithMany(x=>x.Notifications)
+        builder.HasOne(x => x.User)
+            .WithMany(x => x.Notifications)
             .HasForeignKey("UserId");
-        
     }
 }

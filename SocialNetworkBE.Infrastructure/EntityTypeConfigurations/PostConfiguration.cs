@@ -11,11 +11,9 @@ public class PostConfiguration : IEntityTypeConfiguration<Post>
         builder.HasKey(x => x.Id);
         builder.Property(p => p.Content).IsRequired();
 
-        builder.HasOne(p=>p.CreatedBy)
-            .WithMany(u=>u.Posts)
+        builder.HasOne(p => p.CreatedBy)
+            .WithMany(u => u.Posts)
             .HasForeignKey("PlayerId")
             .OnDelete(DeleteBehavior.Restrict);
-
-
     }
 }

@@ -15,8 +15,8 @@ public class BookingRepository : GenericRepository<Booking>, IBookingRepository
     {
         return await _context.Bookings
             .Where(b => b.ReservedBy.Id == playerId)
-            .Include(b=> b.Field)
-            .Include(b=>b.Match)
+            .Include(b => b.Field)
+            .Include(b => b.Match)
             .ToListAsync();
     }
 

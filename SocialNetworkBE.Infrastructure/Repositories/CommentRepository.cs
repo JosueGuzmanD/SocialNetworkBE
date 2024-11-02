@@ -4,7 +4,7 @@ using SocialNetworkBE.Domain.Repositories;
 
 namespace SocialNetworkBE.Infrastructure.Repositories;
 
-public class CommentRepository: GenericRepository<Comment>, ICommentRepository
+public class CommentRepository : GenericRepository<Comment>, ICommentRepository
 {
     public CommentRepository(SocialNetworkDbContext context) : base(context)
     {
@@ -14,7 +14,7 @@ public class CommentRepository: GenericRepository<Comment>, ICommentRepository
     {
         return await _context.Comments
             .Where(c => c.Post.Id == postId)
-            .Include(c=>c.Player)
+            .Include(c => c.Player)
             .ToListAsync();
     }
 
@@ -33,7 +33,7 @@ public class CommentRepository: GenericRepository<Comment>, ICommentRepository
             .Where(c => c.Post.Id == postId)
             .Include(c => c.Post)
             .Include(c => c.Player)
-            .OrderByDescending(c=>c.CreationDate.Date)
+            .OrderByDescending(c => c.CreationDate.Date)
             .Take(limit)
             .ToListAsync();
     }

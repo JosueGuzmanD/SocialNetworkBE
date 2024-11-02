@@ -4,12 +4,12 @@ using SocialNetworkBE.Domain.Entities;
 
 namespace SocialNetworkBE.Infrastructure.EntityTypeConfigurations;
 
-public class TeamConfiguration: IEntityTypeConfiguration<Team>
+public class TeamConfiguration : IEntityTypeConfiguration<Team>
 {
     public void Configure(EntityTypeBuilder<Team> builder)
     {
         builder.HasKey(t => t.Id);
-        
+
         builder.Property(t => t.Name)
             .IsRequired()
             .HasMaxLength(100);

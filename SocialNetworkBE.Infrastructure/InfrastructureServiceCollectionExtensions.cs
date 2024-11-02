@@ -7,10 +7,11 @@ namespace SocialNetworkBE.Infrastructure;
 
 public static class InfrastructureServiceCollectionExtensions
 {
-    public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddInfrastructureServices(this IServiceCollection services,
+        IConfiguration configuration)
     {
-        services.AddDbContext<SocialNetworkDbContext>(options=> options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+        services.AddDbContext<SocialNetworkDbContext>(options =>
+            options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
         return services;
-        
     }
 }

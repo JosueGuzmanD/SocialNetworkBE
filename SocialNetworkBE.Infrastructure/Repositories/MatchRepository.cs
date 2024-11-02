@@ -5,7 +5,7 @@ using SocialNetworkBE.Domain.Repositories;
 
 namespace SocialNetworkBE.Infrastructure.Repositories;
 
-public class MatchRepository: GenericRepository<Match>, IMatchRepository
+public class MatchRepository : GenericRepository<Match>, IMatchRepository
 {
     public MatchRepository(SocialNetworkDbContext context) : base(context)
     {
@@ -15,20 +15,20 @@ public class MatchRepository: GenericRepository<Match>, IMatchRepository
     {
         return await _context.Matches
             .Where(m => m.CreatedBy.Id == playerId)
-            .Include(m=>m.Stats)
-            .Include(m=> m.FootballField)
-            .Include(m=> m.Players)
+            .Include(m => m.Stats)
+            .Include(m => m.FootballField)
+            .Include(m => m.Players)
             .ToListAsync();
     }
 
     public async Task<IEnumerable<Match>> GetMatchesByPlayer(Guid playerId)
     {
-        var player= await _context.Players.FirstOrDefaultAsync(p => p.Id == playerId);  
-        
+        var player = await _context.Players.FirstOrDefaultAsync(p => p.Id == playerId);
+
         return await _context.Matches
-            .Where(m => m.Players.Any(p=>p.Id == playerId))
+            .Where(m => m.Players.Any(p => p.Id == playerId))
             .Include(m => m.Players)
-            .Include(m=>m.Stats)
+            .Include(m => m.Stats)
             .ToListAsync();
     }
 
@@ -51,7 +51,7 @@ public class MatchRepository: GenericRepository<Match>, IMatchRepository
     public async Task<IEnumerable<Match>> GetMatchesByDateRange(DateTime startDate, DateTime endDate)
     {
         return await _context.Matches
-            .Where(m => m.StartTime >= startDate && m.StartTime <= endDate) 
+            .Where(m => m.StartTime >= startDate && m.StartTime <= endDate)
             .Include(m => m.Players)
             .Include(m => m.Stats)
             .ToListAsync();
