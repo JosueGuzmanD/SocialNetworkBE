@@ -1,4 +1,4 @@
-﻿namespace SocialNetworkBE.Domain.Entities;
+﻿namespace SocialNetworkBE.Domain.Value_Objects;
 
 public class Scorer
 {
