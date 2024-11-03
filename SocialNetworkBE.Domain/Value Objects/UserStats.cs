@@ -2,16 +2,16 @@
 
 public class PlayerStats
 {
-    public int TotalMatchesPlayed { get; private set; }
-    public int GoalsScored { get; private set; }
-    public int Wins { get; private set; }
-
     public PlayerStats(int totalMatchesPlayed = 0, int goalsScored = 0, int wins = 0)
     {
         TotalMatchesPlayed = totalMatchesPlayed;
         GoalsScored = goalsScored;
         Wins = wins;
     }
+
+    public int TotalMatchesPlayed { get; }
+    public int GoalsScored { get; }
+    public int Wins { get; }
 
     public PlayerStats AddMatchPlayed()
     {

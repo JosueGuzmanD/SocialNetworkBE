@@ -2,11 +2,6 @@
 
 public abstract class BaseEntity
 {
-    public Guid Id { get; set; }
-    public DateTime CreationDate { get; set; }
-    public DateTime UpdatedDate { get; set; }
-    public bool IsDeleted { get; set; }
-
     protected BaseEntity()
     {
         Id = Guid.NewGuid();
@@ -14,6 +9,11 @@ public abstract class BaseEntity
         UpdatedDate = DateTime.UtcNow;
         IsDeleted = false;
     }
+
+    public Guid Id { get; set; }
+    public DateTime CreationDate { get; set; }
+    public DateTime UpdatedDate { get; set; }
+    public bool IsDeleted { get; set; }
 
     public void UpdateTimestamp()
     {

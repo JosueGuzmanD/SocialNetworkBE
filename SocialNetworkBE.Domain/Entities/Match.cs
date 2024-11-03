@@ -9,7 +9,7 @@ public class Match : BaseEntity
     public MatchDuration MatchDuration { get; set; }
     public FootballField FootballField { get; set; }
 
-    public MatchTeams Teams { get; private set; }
+    public MatchTeams Teams { get; }
 
     public MatchStatus Status { get; set; }
     public List<Player> Players { get; set; } = new();

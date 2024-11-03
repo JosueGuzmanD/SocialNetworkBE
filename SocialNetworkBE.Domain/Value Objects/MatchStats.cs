@@ -1,18 +1,16 @@
-﻿using SocialNetworkBE.Domain.Entities;
-
-namespace SocialNetworkBE.Domain.Value_Objects;
+﻿namespace SocialNetworkBE.Domain.Value_Objects;
 
 public class MatchStats
 {
-    public int GoalsTeamA { get; private set; }
-    public int GoalsTeamB { get; private set; }
-    public List<Scorer> Scorers { get; private set; } = new();
-
     public MatchStats(int goalsTeamA = 0, int goalsTeamB = 0)
     {
         GoalsTeamA = goalsTeamA;
         GoalsTeamB = goalsTeamB;
     }
+
+    public int GoalsTeamA { get; private set; }
+    public int GoalsTeamB { get; private set; }
+    public List<Scorer> Scorers { get; } = new();
 
     public void AddGoalForTeamA(Guid playerId)
     {

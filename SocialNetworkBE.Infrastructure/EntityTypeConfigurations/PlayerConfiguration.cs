@@ -32,7 +32,7 @@ public class PlayerConfiguration : IEntityTypeConfiguration<Player>
                 .IsRequired()
                 .HasDefaultValue(0);
         });
-        
+
         builder.HasMany(p => p.TeamHistory)
             .WithOne(tm => tm.Player)
             .HasForeignKey(tm => tm.PlayerId)

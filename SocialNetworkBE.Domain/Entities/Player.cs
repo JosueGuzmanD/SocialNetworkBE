@@ -14,7 +14,7 @@ public class Player : BaseEntity
 
     public List<TeamMembership> TeamHistory { get; set; } = new();
 
-    
+
     public List<Match> CreatedMatches { get; set; } = new();
 
     public List<Positions> Positions { get; set; } = new();

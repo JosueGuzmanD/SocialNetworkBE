@@ -5,7 +5,7 @@ using SocialNetworkBE.Domain.Interfaces.Repositories;
 
 namespace SocialNetworkBE.Infrastructure.Repositories;
 
-public class PostRepository: GenericRepository<Post>, IPostRepository
+public class PostRepository : GenericRepository<Post>, IPostRepository
 {
     public PostRepository(SocialNetworkDbContext context) : base(context)
     {
@@ -29,7 +29,8 @@ public class PostRepository: GenericRepository<Post>, IPostRepository
     {
         return await _context.Posts
             .Where(p => p.PostType == PostType.ResultAnnouncement)
-            .ToListAsync();    }
+            .ToListAsync();
+    }
 
     public async Task<List<Post>> GetPostsByDateRangeAsync(DateTime startDate, DateTime endDate)
     {

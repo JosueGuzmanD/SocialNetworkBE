@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-
 namespace SocialNetworkBE.Application;
 
 public static class ApplicationServiceCollectionExtensions

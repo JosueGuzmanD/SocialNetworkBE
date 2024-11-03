@@ -35,7 +35,7 @@ public class MatchConfiguration : IEntityTypeConfiguration<Match>
                 scorer.WithOwner().HasForeignKey("MatchId");
             });
         });
-        
+
         builder.OwnsOne(m => m.Teams, teams =>
         {
             teams.WithOwner();

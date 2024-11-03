@@ -1,19 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SocialNetworkBE.Domain.Value_Objects;
+﻿namespace SocialNetworkBE.Domain.Value_Objects;
 
 public class MatchDuration
 {
-    public TimeSpan TotalTime { get; private set; }
-    public TimeSpan HalfTimeDuration { get; private set; }
-    public TimeSpan ExtraTime { get; private set; }
-    public TimeSpan WaterBreakDuration { get; private set; }
-    public TimeSpan AddedTime { get; private set; }
-
     public MatchDuration(TimeSpan totalTime, TimeSpan halfTimeDuration, TimeSpan extraTime, TimeSpan waterBreakDuration,
         TimeSpan addedTime)
     {
@@ -26,6 +14,12 @@ public class MatchDuration
         WaterBreakDuration = waterBreakDuration;
         AddedTime = addedTime;
     }
+
+    public TimeSpan TotalTime { get; }
+    public TimeSpan HalfTimeDuration { get; private set; }
+    public TimeSpan ExtraTime { get; }
+    public TimeSpan WaterBreakDuration { get; private set; }
+    public TimeSpan AddedTime { get; }
 
     public TimeSpan GetFinalTimeWithExtras()
     {

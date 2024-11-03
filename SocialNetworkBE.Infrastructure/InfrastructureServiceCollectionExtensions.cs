@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-
 namespace SocialNetworkBE.Infrastructure;
 
 public static class InfrastructureServiceCollectionExtensions

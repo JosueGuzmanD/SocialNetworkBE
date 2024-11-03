@@ -4,7 +4,6 @@ namespace SocialNetworkBE.Domain.Value_Objects;
 
 public class MatchTeams
 {
-    public Team TeamA { get; private set; }
-    public Team TeamB { get; private set; }
-    
+    public Team TeamA { get; }
+    public Team TeamB { get; }
 }

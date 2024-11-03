@@ -5,7 +5,7 @@ using SocialNetworkBE.Domain.Interfaces.Repositories;
 
 namespace SocialNetworkBE.Infrastructure.Repositories;
 
-public class PlayerRepository: GenericRepository<Player>, IPlayerRepository
+public class PlayerRepository : GenericRepository<Player>, IPlayerRepository
 {
     public PlayerRepository(SocialNetworkDbContext context) : base(context)
     {
@@ -28,14 +28,14 @@ public class PlayerRepository: GenericRepository<Player>, IPlayerRepository
     public async Task<List<Player>> GetPlayersByTeamAsync(Guid teamId)
     {
         return await _context.Players
-            .Where(p => p.TeamHistory.Any(th=>th.TeamId == teamId))
+            .Where(p => p.TeamHistory.Any(th => th.TeamId == teamId))
             .ToListAsync();
-
     }
+
     public async Task<List<Player>> GetTopScorersAsync(int limit)
     {
         return await _context.Players
-            .OrderByDescending(p => p.Stats.GoalsScored) 
+            .OrderByDescending(p => p.Stats.GoalsScored)
             .Take(limit)
             .ToListAsync();
     }

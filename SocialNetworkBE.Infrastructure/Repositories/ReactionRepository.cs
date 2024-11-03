@@ -5,7 +5,7 @@ using SocialNetworkBE.Domain.Interfaces.Repositories;
 
 namespace SocialNetworkBE.Infrastructure.Repositories;
 
-public class ReactionRepository: GenericRepository<Reaction>, IReactionRepository
+public class ReactionRepository : GenericRepository<Reaction>, IReactionRepository
 {
     public ReactionRepository(SocialNetworkDbContext context) : base(context)
     {
@@ -29,7 +29,7 @@ public class ReactionRepository: GenericRepository<Reaction>, IReactionRepositor
     {
         return await _context.Reactions
             .Where(r => r.Player.Id == playerId)
-            .ToListAsync(); 
+            .ToListAsync();
     }
 
     public async Task<int> CountReactionsByTypeAsync(Guid postId, ReactionType type)

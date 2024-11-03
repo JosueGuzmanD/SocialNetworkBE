@@ -14,7 +14,7 @@ public class TeamMembershipRepository : GenericRepository<TeamMembership>, ITeam
     {
         return await _context.TeamMemberships
             .Where(tm => tm.PlayerId == playerId)
-            .Include(tm => tm.Team) 
+            .Include(tm => tm.Team)
             .ToListAsync();
     }
 
@@ -22,14 +22,14 @@ public class TeamMembershipRepository : GenericRepository<TeamMembership>, ITeam
     {
         return await _context.TeamMemberships
             .Where(tm => tm.TeamId == teamId)
-            .Include(tm => tm.Player) 
+            .Include(tm => tm.Player)
             .ToListAsync();
     }
 
     public async Task<List<TeamMembership>> GetActiveMembershipsAsync()
     {
         return await _context.TeamMemberships
-            .Where(tm => tm.LeftDate == null) 
+            .Where(tm => tm.LeftDate == null)
             .ToListAsync();
     }
 

@@ -2,16 +2,16 @@
 
 public class TeamStats
 {
-    public int TotalMatchesPlayed { get; private set; }
-    public int Wins { get; private set; }
-    public int Losses { get; private set; }
-
     public TeamStats(int totalMatchesPlayed = 0, int wins = 0, int losses = 0)
     {
         TotalMatchesPlayed = totalMatchesPlayed;
         Wins = wins;
         Losses = losses;
     }
+
+    public int TotalMatchesPlayed { get; }
+    public int Wins { get; }
+    public int Losses { get; }
 
     public TeamStats AddWin()
     {
