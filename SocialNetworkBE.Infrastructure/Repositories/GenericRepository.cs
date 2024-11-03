@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SocialNetworkBE.Domain.Repositories;
+using SocialNetworkBE.Domain.Interfaces.Repositories;
 
 namespace SocialNetworkBE.Infrastructure.Repositories;
 

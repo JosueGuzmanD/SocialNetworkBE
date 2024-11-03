@@ -1,6 +1,6 @@
 ﻿using SocialNetworkBE.Domain.Entities;
 
-namespace SocialNetworkBE.Domain.Repositories;
+namespace SocialNetworkBE.Domain.Interfaces.Repositories;
 
 public interface IBookingRepository : IGenericRepository<Booking>
 {

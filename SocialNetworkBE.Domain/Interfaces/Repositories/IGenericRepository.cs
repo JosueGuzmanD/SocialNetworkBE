@@ -1,4 +1,4 @@
-﻿namespace SocialNetworkBE.Domain.Repositories;
+﻿namespace SocialNetworkBE.Domain.Interfaces.Repositories;
 
 public interface IGenericRepository<T> where T : class
 {

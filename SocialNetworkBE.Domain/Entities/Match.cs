@@ -8,6 +8,9 @@ public class Match : BaseEntity
     public DateTime StartTime { get; set; }
     public MatchDuration MatchDuration { get; set; }
     public FootballField FootballField { get; set; }
+
+    public MatchTeams Teams { get; private set; }
+
     public MatchStatus Status { get; set; }
     public List<Player> Players { get; set; } = new();
     public Player CreatedBy { get; set; }

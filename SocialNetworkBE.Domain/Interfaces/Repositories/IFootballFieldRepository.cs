@@ -1,7 +1,7 @@
 ﻿using SocialNetworkBE.Domain.Entities;
 using SocialNetworkBE.Domain.Enums;
 
-namespace SocialNetworkBE.Domain.Repositories;
+namespace SocialNetworkBE.Domain.Interfaces.Repositories;
 
 public interface IFootballFieldRepository : IGenericRepository<FootballField>
 {

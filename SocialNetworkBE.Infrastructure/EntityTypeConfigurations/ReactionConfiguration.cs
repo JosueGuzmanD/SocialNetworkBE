@@ -10,7 +10,7 @@ public class ReactionConfiguration : IEntityTypeConfiguration<Reaction>
     {
         builder.HasKey(x => x.Id);
 
-        builder.HasOne(x => x.User)
+        builder.HasOne(x => x.Player)
             .WithMany(x => x.Reactions)
             .HasForeignKey("UserId")
             .OnDelete(DeleteBehavior.Restrict);

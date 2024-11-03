@@ -35,6 +35,19 @@ public class MatchConfiguration : IEntityTypeConfiguration<Match>
                 scorer.WithOwner().HasForeignKey("MatchId");
             });
         });
+        
+        builder.OwnsOne(m => m.Teams, teams =>
+        {
+            teams.WithOwner();
+
+            teams.HasOne(t => t.TeamA)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            teams.HasOne(t => t.TeamB)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Restrict);
+        });
 
         builder.HasOne(m => m.FootballField)
             .WithMany(f => f.Matches)

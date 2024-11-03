@@ -18,6 +18,7 @@ public class SocialNetworkDbContext : DbContext
     public DbSet<Post> Posts { get; set; }
     public DbSet<Reaction> Reactions { get; set; }
     public DbSet<Team> Teams { get; set; }
+    public DbSet<TeamMembership> TeamMemberships { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
