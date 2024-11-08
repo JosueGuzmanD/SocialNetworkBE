@@ -23,4 +23,6 @@ public class Player : BaseEntity
     public List<Notification> Notifications { get; set; } = new();
     public List<Post> Posts { get; set; } = new();
     public List<Reaction> Reactions { get; set; } = new();
+
+    public ApplicationUser ApplicationUser { get; set; }
 }

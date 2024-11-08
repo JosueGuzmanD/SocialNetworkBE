@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using SocialNetworkBE.Domain.Entities;
 
 namespace SocialNetworkBE.Infrastructure;
 
-public class SocialNetworkDbContext : DbContext
+public class SocialNetworkDbContext : IdentityDbContext<ApplicationUser>
 {
     public SocialNetworkDbContext(DbContextOptions<SocialNetworkDbContext> options) : base(options)
     {
@@ -26,5 +27,11 @@ public class SocialNetworkDbContext : DbContext
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(SocialNetworkDbContext).Assembly);
 
         base.OnModelCreating(modelBuilder);
+        
+        modelBuilder.Entity<Player>()
+            .HasOne(p => p.ApplicationUser)
+            .WithOne(au => au.Player)
+            .HasForeignKey<ApplicationUser>(au => au.PlayerId)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }
