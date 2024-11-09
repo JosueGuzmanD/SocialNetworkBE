@@ -18,7 +18,7 @@ public class EmailIsValidSpecification : ISpecification<CreatePlayerDto>
     public string ErrorMessage => "The email format is invalid.";
 }
 
-public class EmailIsUniqueSpecification:ISpecification<CreatePlayerDto>
+public class EmailIsUniqueSpecification: IAsyncSpecification<CreatePlayerDto>
 {
     private readonly IPlayerRepository _playerRepository;
 
@@ -28,12 +28,11 @@ public class EmailIsUniqueSpecification:ISpecification<CreatePlayerDto>
     }
 
 
-    public bool IsSatisfiedBy(CreatePlayerDto entity)
+    public async Task<bool> IsSatisfiedByAsync(CreatePlayerDto entity)
     {
-        var existingMail= _playerRepository.GetPlayerByEmailAsync(entity.Email);
+        var existingMail= await _playerRepository.GetPlayerByEmailAsync(entity.Email);
         return existingMail == null;
     }
-
     public string ErrorMessage => "The email format is already registered.";
 }
 
