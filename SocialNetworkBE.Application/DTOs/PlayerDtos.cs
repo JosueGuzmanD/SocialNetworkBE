@@ -1,9 +1,5 @@
 ﻿namespace SocialNetworkBE.Application.DTOs;
 
-public class PlayerDto
-{
-    
-}
 public class CreatePlayerDto
 {
     public string Name { get; set; }

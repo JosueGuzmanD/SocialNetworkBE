@@ -20,13 +20,9 @@ public class PlayerService : IPlayerService
         
     }
 
+
     public Task<CreatePlayerDto> RegisterPlayerAsync(CreatePlayerDto createPlayerDto)
     {
-        var validator = new PlayerRegistrationValidator();
-        validator.Validate(createPlayerDto);
-        
-        
-
-
+        throw new NotImplementedException();
     }
 }

@@ -24,6 +24,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialNetworkBE.Api", "Soci
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B7594D55-4F13-4127-BA8C-64969DCDF73E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialNetworkBE.Test", "SocialNetworkBE.Test\SocialNetworkBE.Test.csproj", "{3013C6DE-C958-445A-AC50-05C5D5607E61}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,6 +48,10 @@ Global
 		{81FDA281-5ED3-45E2-8149-FD3ECD7515EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81FDA281-5ED3-45E2-8149-FD3ECD7515EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81FDA281-5ED3-45E2-8149-FD3ECD7515EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3013C6DE-C958-445A-AC50-05C5D5607E61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3013C6DE-C958-445A-AC50-05C5D5607E61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3013C6DE-C958-445A-AC50-05C5D5607E61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3013C6DE-C958-445A-AC50-05C5D5607E61}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +61,7 @@ Global
 		{FAF9023C-A2E4-4658-BC8A-0416A836F96F} = {B7594D55-4F13-4127-BA8C-64969DCDF73E}
 		{8465F4A8-CE5A-4EC9-9729-D5F074691F46} = {B7594D55-4F13-4127-BA8C-64969DCDF73E}
 		{81FDA281-5ED3-45E2-8149-FD3ECD7515EE} = {B7594D55-4F13-4127-BA8C-64969DCDF73E}
+		{3013C6DE-C958-445A-AC50-05C5D5607E61} = {B7594D55-4F13-4127-BA8C-64969DCDF73E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CFB5ECE5-410B-48C5-AC78-55650D394452}
