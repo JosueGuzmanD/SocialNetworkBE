@@ -1,6 +1,7 @@
 ﻿using SocialNetworkBE.Application.DTOs;
 using SocialNetworkBE.Application.Specifications;
 using Xunit;
+using Assert = Xunit.Assert;
 
 public class UsernameFormatSpecificationTests
 {

@@ -2,12 +2,10 @@
 
 public interface ISpecification<T>
 {
-    bool IsSatisfiedBy(T entity);
-    string ErrorMessage { get; }
+   Result<T> IsSatisfiedBy(T entity);
 }
 
 public interface IAsyncSpecification<T>
 {
-    Task<bool> IsSatisfiedByAsync(T entity);
-    string ErrorMessage { get; }
+   Task<Result<T>> IsSatisfiedByAsync(T entity);
 }

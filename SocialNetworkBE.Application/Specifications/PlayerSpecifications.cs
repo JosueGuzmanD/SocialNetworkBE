@@ -6,19 +6,23 @@ namespace SocialNetworkBE.Application.Specifications;
 
 public class EmailIsValidSpecification : ISpecification<CreatePlayerDto>
 {
-    public bool IsSatisfiedBy(CreatePlayerDto player)
+    public Result<CreatePlayerDto> IsSatisfiedBy(CreatePlayerDto entity)
     {
-        var validator= new InlineValidator<string>();
-        validator.RuleFor(e=>e).EmailAddress();
-        var result = validator.Validate(player.Email);
-        
-       return result.IsValid;
-        
+        var validator = new InlineValidator<string>();
+        validator.RuleFor(e => e).EmailAddress();
+        var result = validator.Validate(entity.Email);
+
+        if (!result.IsValid)
+        {
+            return Result<CreatePlayerDto>.Failure("Invalid email format.");
+        }
+
+        return Result<CreatePlayerDto>.Success(entity);
     }
-    public string ErrorMessage => "The email format is invalid.";
 }
 
-public class EmailIsUniqueSpecification: IAsyncSpecification<CreatePlayerDto>
+
+public class EmailIsUniqueSpecification : IAsyncSpecification<CreatePlayerDto>
 {
     private readonly IPlayerRepository _playerRepository;
 
@@ -27,25 +31,36 @@ public class EmailIsUniqueSpecification: IAsyncSpecification<CreatePlayerDto>
         _playerRepository = playerRepository;
     }
 
-
-    public async Task<bool> IsSatisfiedByAsync(CreatePlayerDto entity)
+    public async Task<Result<CreatePlayerDto>> IsSatisfiedByAsync(CreatePlayerDto entity)
     {
-        var existingMail= await _playerRepository.GetPlayerByEmailAsync(entity.Email);
-        return existingMail == null;
+        var existingPlayer = await _playerRepository.GetPlayerByEmailAsync(entity.Email);
+
+        if (existingPlayer != null)
+        {
+            return Result<CreatePlayerDto>.Failure("The email is already in use.");
+        }
+
+        return Result<CreatePlayerDto>.Success(entity);
     }
-    public string ErrorMessage => "The email format is already registered.";
 }
 
 public class UsernameFormatSpecification : ISpecification<CreatePlayerDto>
 {
-    public string ErrorMessage => "Username must be alphanumeric without spaces or special characters.";
-
-    public bool IsSatisfiedBy(CreatePlayerDto player)
+    public Result<CreatePlayerDto> IsSatisfiedBy(CreatePlayerDto player)
     {
         var validator = new InlineValidator<string>();
-        validator.RuleFor(u => u).Matches("^[a-zA-Z0-9]+$").WithMessage(ErrorMessage);
-        var result = validator.Validate(player.Name);
-        return result.IsValid;
+        validator.RuleFor(u => u)
+            .Matches("^[a-zA-Z0-9]+$")
+            .WithMessage("Username must be alphanumeric without spaces or special characters.");
+        
+        var validationResult = validator.Validate(player.Name);
+
+        if (!validationResult.IsValid)
+        {
+            return Result<CreatePlayerDto>.Failure(validationResult.Errors.First().ErrorMessage);
+        }
+
+        return Result<CreatePlayerDto>.Success(player);
     }
 }
 

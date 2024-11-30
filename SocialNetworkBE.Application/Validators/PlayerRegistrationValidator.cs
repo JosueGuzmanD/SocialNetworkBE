@@ -9,40 +9,39 @@ public class PlayerRegistrationValidator
     private readonly List<ISpecification<CreatePlayerDto>> _syncSpecifications;
     private readonly List<IAsyncSpecification<CreatePlayerDto>> _asyncSpecifications;
 
-
     public PlayerRegistrationValidator(IPlayerRepository playerRepository)
     {
         _syncSpecifications = new List<ISpecification<CreatePlayerDto>>
         {
-            new EmailIsValidSpecification(),
-
+            new EmailIsValidSpecification()
         };
 
         _asyncSpecifications = new List<IAsyncSpecification<CreatePlayerDto>>
         {
             new EmailIsUniqueSpecification(playerRepository)
-
         };
-
     }
 
-    public async Task ValidateAsync(CreatePlayerDto player)
+    public async Task<Result<CreatePlayerDto>> ValidateAsync(CreatePlayerDto player)
     {
         foreach (var spec in _syncSpecifications)
         {
-            if (!spec.IsSatisfiedBy(player))
+            var result = spec.IsSatisfiedBy(player);
+            if (!result.IsSuccess)
             {
-                throw new Exception(spec.ErrorMessage);
+                return result;
             }
         }
 
         foreach (var asyncSpec in _asyncSpecifications)
         {
-            if (!await asyncSpec.IsSatisfiedByAsync(player))
+            var result = await asyncSpec.IsSatisfiedByAsync(player);
+            if (!result.IsSuccess)
             {
-                throw new Exception(asyncSpec.ErrorMessage);
+                return result;
             }
         }
+
+        return Result<CreatePlayerDto>.Success(player);
     }
-    
 }

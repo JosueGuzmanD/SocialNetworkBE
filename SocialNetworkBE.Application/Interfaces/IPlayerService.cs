@@ -4,5 +4,6 @@ namespace SocialNetworkBE.Application.Interfaces;
 
 public interface IPlayerService
 {
-    Task<CreatePlayerDto> RegisterPlayerAsync(CreatePlayerDto createPlayerDto);
+    Task<Result<CreatePlayerDto>> RegisterPlayerAsync(CreatePlayerDto createPlayerDto, string password);
+
 }

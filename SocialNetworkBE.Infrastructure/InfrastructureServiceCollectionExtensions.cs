@@ -24,6 +24,7 @@ public static class InfrastructureServiceCollectionExtensions
                 options.Password.RequiredLength = 8;
                 options.Password.RequireUppercase = false;
                 options.User.RequireUniqueEmail = true;
+                
             })
             .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<SocialNetworkDbContext>()
