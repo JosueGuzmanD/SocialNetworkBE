@@ -12,7 +12,7 @@ using Xunit;
 public class EmailIsUniqueSpecificationTests
 {
     [Fact]
-    public async Task IsSatisfiedByAsync_ReturnsTrue_WhenEmailIsUnique()
+    public async Task IsSatisfiedByAsync_ReturnsSuccess_WhenEmailIsUnique()
     {
         // Arrange
         var playerRepositoryMock = new Mock<IPlayerRepository>();
@@ -26,16 +26,16 @@ public class EmailIsUniqueSpecificationTests
         var result = await specification.IsSatisfiedByAsync(dto);
 
         // Assert
-        Assert.True(result);
+        Assert.True(result.IsSuccess);
     }
 
     [Fact]
-    public async Task IsSatisfiedByAsync_ReturnsFalse_WhenEmailIsNotUnique()
+    public async Task IsSatisfiedByAsync_ReturnsFailure_WhenEmailIsNotUnique()
     {
         // Arrange
         var playerRepositoryMock = new Mock<IPlayerRepository>();
         playerRepositoryMock.Setup(repo => repo.GetPlayerByEmailAsync(It.IsAny<string>()))
-            .ReturnsAsync(new Player()); // Simula que el correo ya está registrado
+            .ReturnsAsync(new Player());
 
         var specification = new EmailIsUniqueSpecification(playerRepositoryMock.Object);
         var dto = new CreatePlayerDto { Email = "existing@example.com" };
@@ -44,6 +44,7 @@ public class EmailIsUniqueSpecificationTests
         var result = await specification.IsSatisfiedByAsync(dto);
 
         // Assert
-        Assert.False(result);
+        Assert.False(result.IsSuccess);
+        Assert.Equal("The email is already in use.", result.ErrorMessage);
     }
 }

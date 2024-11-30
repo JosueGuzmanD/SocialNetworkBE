@@ -8,7 +8,7 @@ namespace SocialNetworkBE.Test;
 public class EmailIsValidSpecificationTests
 {
     [Fact]
-    public void IsSatisfiedBy_ReturnsTrue_WhenEmailIsValid()
+    public void IsSatisfiedBy_ReturnsSuccess_WhenEmailIsValid()
     {
         // Arrange
         var specification = new EmailIsValidSpecification();
@@ -18,11 +18,11 @@ public class EmailIsValidSpecificationTests
         var result = specification.IsSatisfiedBy(dto);
 
         // Assert
-        Assert.True(result);
+        Assert.True(result.IsSuccess);
     }
 
     [Fact]
-    public void IsSatisfiedBy_ReturnsFalse_WhenEmailIsInvalid()
+    public void IsSatisfiedBy_ReturnsFailure_WhenEmailIsInvalid()
     {
         // Arrange
         var specification = new EmailIsValidSpecification();
@@ -32,7 +32,8 @@ public class EmailIsValidSpecificationTests
         var result = specification.IsSatisfiedBy(dto);
 
         // Assert
-        Assert.False(result);
+        Assert.False(result.IsSuccess);
+        Assert.Equal("Invalid email format.", result.ErrorMessage);
     }
 
     [Xunit.Theory]
@@ -41,15 +42,16 @@ public class EmailIsValidSpecificationTests
     [InlineData("mail@hotmail.com", true)]
     [InlineData("mail@yahoo.com", true)]
     [InlineData("mail@gmail.es", true)]
-
-    public void IsSatisfiedBy_ReturnsTrue_PrincipalMailProviders(string mail, bool expectedResult)
+    public void IsSatisfiedBy_ValidatesPrincipalMailProviders(string mail, bool expectedResult)
     {
-     var specification = new EmailIsValidSpecification();
-     var dto = new CreatePlayerDto { Email = mail };
-     
-     var result = specification.IsSatisfiedBy(dto);
-     
-     Assert.Equal(expectedResult,result);
-     
+        // Arrange
+        var specification = new EmailIsValidSpecification();
+        var dto = new CreatePlayerDto { Email = mail };
+
+        // Act
+        var result = specification.IsSatisfiedBy(dto);
+
+        // Assert
+        Assert.Equal(expectedResult, result.IsSuccess);
     }
 }

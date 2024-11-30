@@ -6,7 +6,7 @@ using Assert = Xunit.Assert;
 public class UsernameFormatSpecificationTests
 {
     [Fact]
-    public void IsSatisfiedBy_ValidAlphanumericUsername_ReturnsTrue()
+    public void IsSatisfiedBy_ReturnsSuccess_WhenUsernameIsAlphanumeric()
     {
         // Arrange
         var specification = new UsernameFormatSpecification();
@@ -16,11 +16,11 @@ public class UsernameFormatSpecificationTests
         var result = specification.IsSatisfiedBy(playerDto);
 
         // Assert
-        Assert.True(result);
+        Assert.True(result.IsSuccess);
     }
 
     [Fact]
-    public void IsSatisfiedBy_UsernameWithSpaces_ReturnsFalse()
+    public void IsSatisfiedBy_ReturnsFailure_WhenUsernameContainsSpaces()
     {
         // Arrange
         var specification = new UsernameFormatSpecification();
@@ -30,11 +30,12 @@ public class UsernameFormatSpecificationTests
         var result = specification.IsSatisfiedBy(playerDto);
 
         // Assert
-        Assert.False(result);
+        Assert.False(result.IsSuccess);
+        Assert.Equal("Username must be alphanumeric without spaces or special characters.", result.ErrorMessage);
     }
 
     [Fact]
-    public void IsSatisfiedBy_UsernameWithSpecialCharacters_ReturnsFalse()
+    public void IsSatisfiedBy_ReturnsFailure_WhenUsernameContainsSpecialCharacters()
     {
         // Arrange
         var specification = new UsernameFormatSpecification();
@@ -44,11 +45,12 @@ public class UsernameFormatSpecificationTests
         var result = specification.IsSatisfiedBy(playerDto);
 
         // Assert
-        Assert.False(result);
+        Assert.False(result.IsSuccess);
+        Assert.Equal("Username must be alphanumeric without spaces or special characters.", result.ErrorMessage);
     }
 
     [Fact]
-    public void IsSatisfiedBy_EmptyUsername_ReturnsFalse()
+    public void IsSatisfiedBy_ReturnsFailure_WhenUsernameIsEmpty()
     {
         // Arrange
         var specification = new UsernameFormatSpecification();
@@ -58,11 +60,12 @@ public class UsernameFormatSpecificationTests
         var result = specification.IsSatisfiedBy(playerDto);
 
         // Assert
-        Assert.False(result);
+        Assert.False(result.IsSuccess);
+        Assert.Equal("Username must be alphanumeric without spaces or special characters.", result.ErrorMessage);
     }
 
     [Fact]
-    public void IsSatisfiedBy_UsernameWithOnlyNumbers_ReturnsTrue()
+    public void IsSatisfiedBy_ReturnsSuccess_WhenUsernameIsOnlyNumbers()
     {
         // Arrange
         var specification = new UsernameFormatSpecification();
@@ -72,19 +75,6 @@ public class UsernameFormatSpecificationTests
         var result = specification.IsSatisfiedBy(playerDto);
 
         // Assert
-        Assert.True(result);
-    }
-
-    [Fact]
-    public void IsSatisfiedBy_ErrorMessageMatchesExpected()
-    {
-        // Arrange
-        var specification = new UsernameFormatSpecification();
-
-        // Act
-        var errorMessage = specification.ErrorMessage;
-
-        // Assert
-        Assert.Equal("Username must be alphanumeric without spaces or special characters.", errorMessage);
+        Assert.True(result.IsSuccess);
     }
 }
