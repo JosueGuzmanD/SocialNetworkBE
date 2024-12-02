@@ -23,15 +23,9 @@ public class SocialNetworkDbContext : IdentityDbContext<ApplicationUser>
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Ignore<Player>();
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(SocialNetworkDbContext).Assembly);
 
         base.OnModelCreating(modelBuilder);
         
-        modelBuilder.Entity<Player>()
-            .HasOne(p => p.ApplicationUser)
-            .WithOne(au => au.Player)
-            .HasForeignKey<ApplicationUser>(au => au.PlayerId)
-            .OnDelete(DeleteBehavior.Cascade);
     }
 }

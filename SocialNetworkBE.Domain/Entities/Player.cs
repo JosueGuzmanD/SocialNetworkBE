@@ -7,10 +7,11 @@ public class Player : BaseEntity
 {
     public string Name { get; set; }
     public string Email { get; set; }
-    public string Bio { get; set; }
-    public string AvatarUrl { get; set; }
+    public string? Bio { get; set; }
+    public string? AvatarUrl { get; set; }
 
     public PlayerStats Stats { get; private set; } = new();
+    public ApplicationUser ApplicationUser { get; set; }
 
     public List<TeamMembership> TeamHistory { get; set; } = new();
 
@@ -24,5 +25,4 @@ public class Player : BaseEntity
     public List<Post> Posts { get; set; } = new();
     public List<Reaction> Reactions { get; set; } = new();
 
-    public ApplicationUser ApplicationUser { get; set; }
 }

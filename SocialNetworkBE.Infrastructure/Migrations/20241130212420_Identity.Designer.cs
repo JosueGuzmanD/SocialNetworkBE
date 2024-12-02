@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SocialNetworkBE.Infrastructure;
 
@@ -11,9 +12,11 @@ using SocialNetworkBE.Infrastructure;
 namespace SocialNetworkBE.Infrastructure.Migrations
 {
     [DbContext(typeof(SocialNetworkDbContext))]
-    partial class SocialNetworkDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241130212420_Identity")]
+    partial class Identity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -302,7 +305,7 @@ namespace SocialNetworkBE.Infrastructure.Migrations
 
                     b.HasIndex("PostId");
 
-                    b.ToTable("Comments", (string)null);
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("SocialNetworkBE.Domain.Entities.FootballField", b =>
@@ -343,7 +346,7 @@ namespace SocialNetworkBE.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FootballFields", (string)null);
+                    b.ToTable("FootballFields");
                 });
 
             modelBuilder.Entity("SocialNetworkBE.Domain.Entities.Match", b =>
@@ -414,7 +417,7 @@ namespace SocialNetworkBE.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Notifications", (string)null);
+                    b.ToTable("Notifications");
                 });
 
             modelBuilder.Entity("SocialNetworkBE.Domain.Entities.Player", b =>
@@ -466,7 +469,7 @@ namespace SocialNetworkBE.Infrastructure.Migrations
 
                     b.HasIndex("TeamId");
 
-                    b.ToTable("Players", (string)null);
+                    b.ToTable("Players");
                 });
 
             modelBuilder.Entity("SocialNetworkBE.Domain.Entities.Post", b =>
@@ -501,7 +504,7 @@ namespace SocialNetworkBE.Infrastructure.Migrations
 
                     b.HasIndex("PlayerId");
 
-                    b.ToTable("Posts", (string)null);
+                    b.ToTable("Posts");
                 });
 
             modelBuilder.Entity("SocialNetworkBE.Domain.Entities.Reaction", b =>
@@ -542,7 +545,7 @@ namespace SocialNetworkBE.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Reactions", (string)null);
+                    b.ToTable("Reactions");
                 });
 
             modelBuilder.Entity("SocialNetworkBE.Domain.Entities.Team", b =>
@@ -570,7 +573,7 @@ namespace SocialNetworkBE.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Teams", (string)null);
+                    b.ToTable("Teams");
                 });
 
             modelBuilder.Entity("SocialNetworkBE.Domain.Entities.TeamMembership", b =>
@@ -606,7 +609,7 @@ namespace SocialNetworkBE.Infrastructure.Migrations
 
                     b.HasIndex("TeamId");
 
-                    b.ToTable("TeamMemberships", (string)null);
+                    b.ToTable("TeamMemberships");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -719,7 +722,7 @@ namespace SocialNetworkBE.Infrastructure.Migrations
 
             modelBuilder.Entity("SocialNetworkBE.Domain.Entities.FootballField", b =>
                 {
-                    b.OwnsOne("SocialNetworkBE.Domain.Entities.FootballField.Address#SocialNetworkBE.Domain.Value_Objects.Address", "Address", b1 =>
+                    b.OwnsOne("SocialNetworkBE.Domain.Value_Objects.Address", "Address", b1 =>
                         {
                             b1.Property<Guid>("FootballFieldId")
                                 .HasColumnType("uniqueidentifier");
@@ -750,7 +753,7 @@ namespace SocialNetworkBE.Infrastructure.Migrations
 
                             b1.HasKey("FootballFieldId");
 
-                            b1.ToTable("FootballFields", (string)null);
+                            b1.ToTable("FootballFields");
 
                             b1.WithOwner()
                                 .HasForeignKey("FootballFieldId");
@@ -774,7 +777,7 @@ namespace SocialNetworkBE.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.OwnsOne("SocialNetworkBE.Domain.Entities.Match.MatchDuration#SocialNetworkBE.Domain.Value_Objects.MatchDuration", "MatchDuration", b1 =>
+                    b.OwnsOne("SocialNetworkBE.Domain.Value_Objects.MatchDuration", "MatchDuration", b1 =>
                         {
                             b1.Property<Guid>("MatchId")
                                 .HasColumnType("uniqueidentifier");
@@ -802,7 +805,7 @@ namespace SocialNetworkBE.Infrastructure.Migrations
                                 .HasForeignKey("MatchId");
                         });
 
-                    b.OwnsOne("SocialNetworkBE.Domain.Entities.Match.Stats#SocialNetworkBE.Domain.Value_Objects.MatchStats", "Stats", b1 =>
+                    b.OwnsOne("SocialNetworkBE.Domain.Value_Objects.MatchStats", "Stats", b1 =>
                         {
                             b1.Property<Guid>("MatchId")
                                 .HasColumnType("uniqueidentifier");
@@ -815,12 +818,12 @@ namespace SocialNetworkBE.Infrastructure.Migrations
 
                             b1.HasKey("MatchId");
 
-                            b1.ToTable("Match", (string)null);
+                            b1.ToTable("Match");
 
                             b1.WithOwner()
                                 .HasForeignKey("MatchId");
 
-                            b1.OwnsMany("SocialNetworkBE.Domain.Entities.Match.Stats#SocialNetworkBE.Domain.Value_Objects.MatchStats.Scorers#SocialNetworkBE.Domain.Value_Objects.Scorer", "Scorers", b2 =>
+                            b1.OwnsMany("SocialNetworkBE.Domain.Value_Objects.Scorer", "Scorers", b2 =>
                                 {
                                     b2.Property<Guid>("Id")
                                         .ValueGeneratedOnAdd()
@@ -848,7 +851,7 @@ namespace SocialNetworkBE.Infrastructure.Migrations
                             b1.Navigation("Scorers");
                         });
 
-                    b.OwnsOne("SocialNetworkBE.Domain.Entities.Match.Teams#SocialNetworkBE.Domain.Value_Objects.MatchTeams", "Teams", b1 =>
+                    b.OwnsOne("SocialNetworkBE.Domain.Value_Objects.MatchTeams", "Teams", b1 =>
                         {
                             b1.Property<Guid>("MatchId")
                                 .HasColumnType("uniqueidentifier");
@@ -865,7 +868,7 @@ namespace SocialNetworkBE.Infrastructure.Migrations
 
                             b1.HasIndex("TeamBId");
 
-                            b1.ToTable("Match", (string)null);
+                            b1.ToTable("Match");
 
                             b1.WithOwner()
                                 .HasForeignKey("MatchId");
@@ -922,7 +925,7 @@ namespace SocialNetworkBE.Infrastructure.Migrations
                         .WithMany("Players")
                         .HasForeignKey("TeamId");
 
-                    b.OwnsOne("SocialNetworkBE.Domain.Entities.Player.Stats#SocialNetworkBE.Domain.Value_Objects.PlayerStats", "Stats", b1 =>
+                    b.OwnsOne("SocialNetworkBE.Domain.Value_Objects.PlayerStats", "Stats", b1 =>
                         {
                             b1.Property<Guid>("PlayerId")
                                 .HasColumnType("uniqueidentifier");
@@ -944,7 +947,7 @@ namespace SocialNetworkBE.Infrastructure.Migrations
 
                             b1.HasKey("PlayerId");
 
-                            b1.ToTable("Players", (string)null);
+                            b1.ToTable("Players");
 
                             b1.WithOwner()
                                 .HasForeignKey("PlayerId");
@@ -993,7 +996,7 @@ namespace SocialNetworkBE.Infrastructure.Migrations
 
             modelBuilder.Entity("SocialNetworkBE.Domain.Entities.Team", b =>
                 {
-                    b.OwnsOne("SocialNetworkBE.Domain.Entities.Team.Stats#SocialNetworkBE.Domain.Value_Objects.TeamStats", "Stats", b1 =>
+                    b.OwnsOne("SocialNetworkBE.Domain.Value_Objects.TeamStats", "Stats", b1 =>
                         {
                             b1.Property<Guid>("TeamId")
                                 .HasColumnType("uniqueidentifier");
@@ -1009,7 +1012,7 @@ namespace SocialNetworkBE.Infrastructure.Migrations
 
                             b1.HasKey("TeamId");
 
-                            b1.ToTable("Teams", (string)null);
+                            b1.ToTable("Teams");
 
                             b1.WithOwner()
                                 .HasForeignKey("TeamId");

@@ -27,36 +27,28 @@ public class PlayerService : IPlayerService
 
     public async Task<Result<CreatePlayerDto>> RegisterPlayerAsync(CreatePlayerDto createPlayerDto,string password)
     {
-        var validator = new PlayerRegistrationValidator(_playerRepository);
-        await validator.ValidateAsync(createPlayerDto);
-
-        var user = new ApplicationUser()
-        {
-            UserName = createPlayerDto.Name,
-            Email = createPlayerDto.Email,
-        };
-
-        var result = await _userManager.CreateAsync(user, password);
-        if (!result.Succeeded)
-        {
-            return Result<CreatePlayerDto>.Failure(
-                $"Failed to create user: {string.Join(", ", result.Errors.Select(e => e.Description))}");
-        }
-
-        var player = new Player()
+        var player = new Player
         {
             Name = createPlayerDto.Name,
             Email = createPlayerDto.Email,
-            AvatarUrl = createPlayerDto.AvatarUrl,
+            AvatarUrl = createPlayerDto.AvatarUrl
         };
-        
+
         await _playerRepository.AddAsync(player);
-        
-        user.PlayerId = player.Id;
-        await _userManager.UpdateAsync(user);
-        
+
+        var applicationUser = new ApplicationUser
+        {
+            UserName = createPlayerDto.Email,
+            Email = createPlayerDto.Email,
+            PlayerId = player.Id 
+        };
+
+        var identityResult = await _userManager.CreateAsync(applicationUser, password);
+        if (!identityResult.Succeeded)
+        {
+            return Result<CreatePlayerDto>.Failure("Error creating user.");
+        }
         
         return Result<CreatePlayerDto>.Success(createPlayerDto);
-
     }
 }

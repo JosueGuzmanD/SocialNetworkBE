@@ -37,5 +37,6 @@ public class PlayerConfiguration : IEntityTypeConfiguration<Player>
             .WithOne(tm => tm.Player)
             .HasForeignKey(tm => tm.PlayerId)
             .OnDelete(DeleteBehavior.Cascade);
+        
     }
 }
