@@ -30,5 +30,12 @@ public class PlayerController: ControllerBase
         }
         return result;
     }
+
+    [HttpGet("getAllUsers")]
+    public async Task<Result<CreatePlayerDto>> GetAllUsers()
+    {
+        var result= await _playerService.
+        
+    }
     
 }

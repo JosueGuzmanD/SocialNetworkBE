@@ -31,7 +31,8 @@ public class PlayerService : IPlayerService
         {
             Name = createPlayerDto.Name,
             Email = createPlayerDto.Email,
-            AvatarUrl = createPlayerDto.AvatarUrl
+            AvatarUrl = createPlayerDto.AvatarUrl,
+            Bio = createPlayerDto.Bio
         };
 
         await _playerRepository.AddAsync(player);
@@ -50,5 +51,22 @@ public class PlayerService : IPlayerService
         }
         
         return Result<CreatePlayerDto>.Success(createPlayerDto);
+    }
+
+    //*Admin permission
+    public async Task<Result<List<CreatePlayerDto>>> GetAllPlayersAsync()
+    {
+        var playerList = await _playerRepository.GetAllAsync();
+
+        
+        if (!playerList.Any())
+        {
+            return Result<List<CreatePlayerDto>>.Failure("No players found.");
+        }
+
+        var playerListToDto = _mapper.Map<List<CreatePlayerDto>>(playerList);
+
+        return Result<List<CreatePlayerDto>>.Success(playerListToDto);
+
     }
 }
