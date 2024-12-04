@@ -11,6 +11,6 @@ public class ApplicationUserConfiguration : IEntityTypeConfiguration<Application
         builder.HasOne(a => a.Player)
             .WithOne(p => p.ApplicationUser)
             .HasForeignKey<ApplicationUser>(a => a.PlayerId)
-            .OnDelete(DeleteBehavior.Restrict);        
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

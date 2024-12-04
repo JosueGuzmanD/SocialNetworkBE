@@ -12,15 +12,11 @@ public class EmailIsValidSpecification : ISpecification<CreatePlayerDto>
         validator.RuleFor(e => e).EmailAddress();
         var result = validator.Validate(entity.Email);
 
-        if (!result.IsValid)
-        {
-            return Result<CreatePlayerDto>.Failure("Invalid email format.");
-        }
+        if (!result.IsValid) return Result<CreatePlayerDto>.Failure("Invalid email format.");
 
         return Result<CreatePlayerDto>.Success(entity);
     }
 }
-
 
 public class EmailIsUniqueSpecification : IAsyncSpecification<CreatePlayerDto>
 {
@@ -35,10 +31,7 @@ public class EmailIsUniqueSpecification : IAsyncSpecification<CreatePlayerDto>
     {
         var existingPlayer = await _playerRepository.GetPlayerByEmailAsync(entity.Email);
 
-        if (existingPlayer != null)
-        {
-            return Result<CreatePlayerDto>.Failure("The email is already in use.");
-        }
+        if (existingPlayer != null) return Result<CreatePlayerDto>.Failure("The email is already in use.");
 
         return Result<CreatePlayerDto>.Success(entity);
     }
@@ -52,18 +45,12 @@ public class UsernameFormatSpecification : ISpecification<CreatePlayerDto>
         validator.RuleFor(u => u)
             .Matches("^[a-zA-Z0-9]+$")
             .WithMessage("Username must be alphanumeric without spaces or special characters.");
-        
+
         var validationResult = validator.Validate(player.Name);
 
         if (!validationResult.IsValid)
-        {
             return Result<CreatePlayerDto>.Failure(validationResult.Errors.First().ErrorMessage);
-        }
 
         return Result<CreatePlayerDto>.Success(player);
     }
 }
-
-
-
-

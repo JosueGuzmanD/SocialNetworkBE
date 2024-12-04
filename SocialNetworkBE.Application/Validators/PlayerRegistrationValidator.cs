@@ -27,19 +27,13 @@ public class PlayerRegistrationValidator
         foreach (var spec in _syncSpecifications)
         {
             var result = spec.IsSatisfiedBy(player);
-            if (!result.IsSuccess)
-            {
-                return result;
-            }
+            if (!result.IsSuccess) return result;
         }
 
         foreach (var asyncSpec in _asyncSpecifications)
         {
             var result = await asyncSpec.IsSatisfiedByAsync(player);
-            if (!result.IsSuccess)
-            {
-                return result;
-            }
+            if (!result.IsSuccess) return result;
         }
 
         return Result<CreatePlayerDto>.Success(player);

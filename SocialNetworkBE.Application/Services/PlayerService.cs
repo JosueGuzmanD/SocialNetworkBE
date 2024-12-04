@@ -14,18 +14,17 @@ public class PlayerService : IPlayerService
     private readonly IPlayerRepository _playerRepository;
     private readonly IMapper _mapper;
     private readonly UserManager<ApplicationUser> _userManager;
-    
-    
+
+
     public PlayerService(IPlayerRepository playerRepository, IMapper mapper, UserManager<ApplicationUser> userManager)
     {
         _playerRepository = playerRepository;
         _mapper = mapper;
-        _userManager= userManager;
-        
+        _userManager = userManager;
     }
 
 
-    public async Task<Result<CreatePlayerDto>> RegisterPlayerAsync(CreatePlayerDto createPlayerDto,string password)
+    public async Task<Result<CreatePlayerDto>> RegisterPlayerAsync(CreatePlayerDto createPlayerDto, string password)
     {
         var player = new Player
         {
@@ -41,15 +40,12 @@ public class PlayerService : IPlayerService
         {
             UserName = createPlayerDto.Email,
             Email = createPlayerDto.Email,
-            PlayerId = player.Id 
+            PlayerId = player.Id
         };
 
         var identityResult = await _userManager.CreateAsync(applicationUser, password);
-        if (!identityResult.Succeeded)
-        {
-            return Result<CreatePlayerDto>.Failure("Error creating user.");
-        }
-        
+        if (!identityResult.Succeeded) return Result<CreatePlayerDto>.Failure("Error creating user.");
+
         return Result<CreatePlayerDto>.Success(createPlayerDto);
     }
 
@@ -58,15 +54,11 @@ public class PlayerService : IPlayerService
     {
         var playerList = await _playerRepository.GetAllAsync();
 
-        
-        if (!playerList.Any())
-        {
-            return Result<List<CreatePlayerDto>>.Failure("No players found.");
-        }
+
+        if (!playerList.Any()) return Result<List<CreatePlayerDto>>.Failure("No players found.");
 
         var playerListToDto = _mapper.Map<List<CreatePlayerDto>>(playerList);
 
         return Result<List<CreatePlayerDto>>.Success(playerListToDto);
-
     }
 }

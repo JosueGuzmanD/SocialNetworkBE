@@ -7,9 +7,8 @@ namespace SocialNetworkBE.Api.Controllers;
 
 [ApiController]
 [Route("api/player")]
-public class PlayerController: ControllerBase
+public class PlayerController : ControllerBase
 {
-    
     private readonly IPlayerService _playerService;
 
     public PlayerController(IPlayerService playerService)
@@ -18,24 +17,20 @@ public class PlayerController: ControllerBase
     }
 
     [HttpPost("register")]
-    public async Task<Result<CreatePlayerDto>> RegisterPlayer([FromBody] CreatePlayerDto createPlayerDto,[FromQuery] string password)
+    public async Task<Result<CreatePlayerDto>> RegisterPlayer([FromBody] CreatePlayerDto createPlayerDto,
+        [FromQuery] string password)
     {
         if (!ModelState.IsValid) return Result<CreatePlayerDto>.Failure("ModelState is not valid");
-       
+
         var result = await _playerService.RegisterPlayerAsync(createPlayerDto, password);
 
-        if (!result.IsSuccess)
-        {
-            return Result<CreatePlayerDto>.Failure(result.ErrorMessage);
-        }
+        if (!result.IsSuccess) return Result<CreatePlayerDto>.Failure(result.ErrorMessage);
         return result;
     }
 
     [HttpGet("getAllUsers")]
     public async Task<Result<CreatePlayerDto>> GetAllUsers()
     {
-        var result= await _playerService.
-        
+        var result = await _playerService.
     }
-    
 }

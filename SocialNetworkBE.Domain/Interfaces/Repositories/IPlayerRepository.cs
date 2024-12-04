@@ -9,5 +9,4 @@ public interface IPlayerRepository : IGenericRepository<Player>
     Task<List<Player>> GetPlayersByPositionAsync(Positions position);
     Task<List<Player>> GetPlayersByTeamAsync(Guid teamId);
     Task<List<Player>> GetTopScorersAsync(int limit);
-    
 }

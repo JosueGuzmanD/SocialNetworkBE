@@ -2,10 +2,10 @@
 
 public interface ISpecification<T>
 {
-   Result<T> IsSatisfiedBy(T entity);
+    Result<T> IsSatisfiedBy(T entity);
 }
 
 public interface IAsyncSpecification<T>
 {
-   Task<Result<T>> IsSatisfiedByAsync(T entity);
+    Task<Result<T>> IsSatisfiedByAsync(T entity);
 }

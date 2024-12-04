@@ -26,6 +26,5 @@ public class SocialNetworkDbContext : IdentityDbContext<ApplicationUser>
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(SocialNetworkDbContext).Assembly);
 
         base.OnModelCreating(modelBuilder);
-        
     }
 }
