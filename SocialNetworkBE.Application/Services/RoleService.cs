@@ -7,12 +7,23 @@ namespace SocialNetworkBE.Application.Services;
 public class RoleService : IRoleService
 {
     private readonly UserManager<ApplicationUser> _userManager;
+    private readonly RoleManager<IdentityRole> _roleManager;
 
-    public RoleService(UserManager<ApplicationUser> userManager)
+    public RoleService(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
     {
         _userManager = userManager;
+        _roleManager = roleManager;
     }
 
+
+    public async Task<Result<string>> CreateRoleAsync(string roleName)
+    {
+        var result= await _roleManager.CreateAsync(new IdentityRole(roleName));
+        
+        return result.Succeeded
+        ? Result<string>.Success(roleName)
+        : Result<string>.Failure("Role creation failed");
+    }
     public async Task<Result<string>> AssignRoleAsync(ApplicationUser user, string role)
     {
         var result = await _userManager.AddToRoleAsync(user, role);
