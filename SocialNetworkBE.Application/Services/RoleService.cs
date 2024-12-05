@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using SocialNetworkBE.Application.DTOs;
 using SocialNetworkBE.Application.Interfaces;
 using SocialNetworkBE.Domain.Entities;
 
@@ -24,30 +25,45 @@ public class RoleService : IRoleService
         ? Result<string>.Success(roleName)
         : Result<string>.Failure("Role creation failed");
     }
-    public async Task<Result<string>> AssignRoleAsync(ApplicationUser user, string role)
+    public async Task<Result<string>> AssignRoleAsync(AssignRoleDto assignRoleDto)
     {
-        var result = await _userManager.AddToRoleAsync(user, role);
+        var user = await _userManager.FindByIdAsync(assignRoleDto.PlayerId);
+        if (user == null)
+        {
+            return Result<string>.Failure("User not found");
+        }
 
+        var result = await _userManager.AddToRoleAsync(user, assignRoleDto.RoleName);
         return result.Succeeded
             ? Result<string>.Success("Successfully assigned role")
             : Result<string>.Failure(string.Join(", ", result.Errors.Select(e => e.Description)));
     }
 
-    public async Task<Result<string>> RemoveRoleAsync(ApplicationUser user, string roleName)
+    public async Task<Result<string>> RemoveRoleAsync(AssignRoleDto assignRoleDto)
     {
-        var result = await _userManager.RemoveFromRoleAsync(user, roleName);
+        var user = await _userManager.FindByIdAsync(assignRoleDto.PlayerId);
+        if (user == null)
+        {
+            return Result<string>.Failure("User not found");
+        }
 
+        var result = await _userManager.RemoveFromRoleAsync(user, assignRoleDto.RoleName);
         return result.Succeeded
             ? Result<string>.Success("Successfully removed role")
             : Result<string>.Failure(string.Join(", ", result.Errors.Select(e => e.Description)));
     }
-
-    public async Task<Result<IList<string>>> GetRolesAsync(ApplicationUser user)
+    public async Task<Result<IList<string>>> GetRolesAsync(string playerId)
     {
+        var user = await _userManager.FindByIdAsync(playerId);
+        if (user == null)
+        {
+            return Result<IList<string>>.Failure("User not found");
+        }
+
         var roles = await _userManager.GetRolesAsync(user);
 
-        if (roles == null || !roles.Any()) return Result<IList<string>>.Failure("No roles found");
-
-        return Result<IList<string>>.Success(roles.ToList());
+        return roles.Any()
+            ? Result<IList<string>>.Success(roles)
+            : Result<IList<string>>.Failure("No roles found for this user");
     }
 }
