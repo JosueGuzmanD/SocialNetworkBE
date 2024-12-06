@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using SocialNetworkBE.Application.DTOs;
 using SocialNetworkBE.Application.Interfaces;
-using SocialNetworkBE.Application.Specifications;
-using SocialNetworkBE.Application.Validators;
 using SocialNetworkBE.Domain.Entities;
 using SocialNetworkBE.Domain.Interfaces.Repositories;
 
@@ -61,4 +60,80 @@ public class PlayerService : IPlayerService
 
         return Result<List<CreatePlayerDto>>.Success(playerListToDto);
     }
+
+    public async Task<Result<PlayerDto>> GetPlayerByIdAsync(Guid id)
+    {
+        var result = await _playerRepository.GetByIdAsync(id);
+
+        if (result == null)
+        {
+            return Result<PlayerDto>.Failure("No player found.");
+        }
+
+        return Result<PlayerDto>.Success(_mapper.Map<PlayerDto>(result));
+    }
+
+    public async Task<Result<List<PlayerDto>>> GetTopScorersAsync(int limit)
+    {
+        var result = await _playerRepository.GetTopScorersAsync(limit);
+
+        if (result == null)
+        {
+            return Result<List<PlayerDto>>.Failure("No players found.");
+        }
+
+        return Result<List<PlayerDto>>.Success(_mapper.Map<List<PlayerDto>>(result));
+    }
+
+    public async Task<Result<PlayerDto>> UpdatePlayerAsync(Guid playerId, UpdatePlayerDto updatePlayerDto)
+    {
+        var player = await _playerRepository.GetByIdAsync(playerId);
+
+        if (player == null)
+        {
+            return Result<PlayerDto>.Failure("Player not found.");
+        }
+
+        _mapper.Map(updatePlayerDto, player);
+        try
+        {
+            await _playerRepository.UpdateAsync(player);
+
+            var playerDto = _mapper.Map<PlayerDto>(player);
+
+            return Result<PlayerDto>.Success(playerDto);
+        }
+        catch (Exception ex)
+        {
+            return Result<PlayerDto>.Failure($"An error occurred while updating the player: {ex.Message}");
+        }
+    }
+
+    public async Task<Result<List<PlayerDto>>> SearchPlayersAsync(PlayerQueryDto query)
+    {
+        var players = _playerRepository.GetQueryable();
+
+        players = ApplyNameFilter(players, query.Name);
+        
+        var result = await players.ToListAsync();
+
+        if (!result.Any())
+        {
+            return Result<List<PlayerDto>>.Failure("No players found matching the criteria.");
+        }
+
+        var playerDtos = _mapper.Map<List<PlayerDto>>(result);
+        return Result<List<PlayerDto>>.Success(playerDtos);
+
+    }
+
+    private IQueryable<Player> ApplyNameFilter(IQueryable<Player> query, string name)
+    {
+        if (!string.IsNullOrWhiteSpace(name))
+        {
+            query= query.Where(p=>p.Name.Contains(name));
+        }
+        return query;
+    }
+    
 }

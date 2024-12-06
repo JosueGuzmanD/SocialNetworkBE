@@ -2,8 +2,8 @@
 
 public class RolesDto
 {
-    
 }
+
 public class AssignRoleDto
 {
     public string PlayerId { get; set; }
