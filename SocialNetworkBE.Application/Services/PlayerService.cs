@@ -113,7 +113,7 @@ public class PlayerService : IPlayerService
     {
         var players = _playerRepository.GetQueryable();
 
-        players = ApplyNameFilter(players, query.Name);
+         players= ApplyFilters(players, query);
         
         var result = await players.ToListAsync();
 
@@ -127,13 +127,29 @@ public class PlayerService : IPlayerService
 
     }
 
-    private IQueryable<Player> ApplyNameFilter(IQueryable<Player> query, string name)
+    private IQueryable<Player> ApplyFilters(IQueryable<Player> players, PlayerQueryDto query)
     {
-        if (!string.IsNullOrWhiteSpace(name))
+        if (!string.IsNullOrEmpty(query.Name))
         {
-            query= query.Where(p=>p.Name.Contains(name));
+            players= players.Where(p => p.Name.Contains(query.Name));
         }
-        return query;
+
+        if (!string.IsNullOrEmpty(query.Email))
+        {
+            players= players.Where(p => p.Email.Contains(query.Email));
+        }
+
+        if (query.MaxGoals.HasValue)
+        {
+            players= players.Where(p=> p.Stats.GoalsScored <= query.MaxGoals.Value);
+        }
+
+        if (query.MinGoals.HasValue)
+        {
+            players = players.Where(p => p.Stats.GoalsScored >= query.MinGoals.Value);
+        }
+
+        return players;
     }
     
 }

@@ -34,8 +34,6 @@ public static class InfrastructureServiceCollectionExtensions
 
         services.AddScoped<IPlayerRepository, PlayerRepository>();
         services.AddScoped<IPlayerService, PlayerService>();
-        services.AddScoped<IRoleService, RoleService>();
-
         services.AddHostedService<RoleInitializer>();
         
         return services;

@@ -18,7 +18,7 @@ public class PlayerController : ControllerBase
     }
 
     [HttpPost("register")]
-    public async Task<IActionResult> RegisterPlayer([FromBody] CreatePlayerDto createPlayerDto, [FromQuery] string password)
+    public async Task<IActionResult> RegisterPlayer(string password,CreatePlayerDto createPlayerDto)
     {
         if (!ModelState.IsValid)
         {
@@ -29,11 +29,42 @@ public class PlayerController : ControllerBase
         return result.ToActionResult(); 
     }
     [Authorize(Roles = "Admin")]
-    [HttpGet("getAllUsers")]
+    [HttpGet("getAllPlayers")]
     public async Task<IActionResult> GetAllUsers()
     {
         var result = await _playerService.GetAllPlayersAsync();
         return result.ToActionResult();
     }
+
+    [HttpGet("GetPlayerById/{id}")]
+    public async Task<ActionResult<PlayerDto>> GetPlayerById(Guid id)
+    {
+        var result = await _playerService.GetPlayerByIdAsync(id);
+        return Ok(result);
+    }
+
+    [HttpGet("GetTopScorers/{limit}")]
+    public async Task<ActionResult<PlayerDto>> GetTopScorers(int limit)
+    {
+        var result= await _playerService.GetTopScorersAsync(limit);
+        
+        return Ok(result);
+    }
+
+    [HttpGet("SearchPlayers")]
+    public async Task<ActionResult<PlayerDto>> SearchPlayersAsync([FromQuery] PlayerQueryDto playerQueryDto)
+    {
+        var result= await _playerService.SearchPlayersAsync(playerQueryDto);
+        return Ok(result);
+    }
+
+    [HttpPut("UpdatePlayer/{id}")]
+    public async Task<IActionResult> UpdatePlayer(Guid id, [FromBody] UpdatePlayerDto updatePlayerDto)
+    {
+        var result= await _playerService.UpdatePlayerAsync(id, updatePlayerDto);
+        
+        return result.ToActionResult();
+    }
+    
     
 }
