@@ -7,6 +7,7 @@ using SocialNetworkBE.Application.Services;
 using SocialNetworkBE.Domain.Entities;
 using SocialNetworkBE.Domain.Interfaces.Repositories;
 using SocialNetworkBE.Infrastructure.Repositories;
+using SocialNetworkBE.Infrastructure.Roles;
 
 namespace SocialNetworkBE.Infrastructure;
 
@@ -35,6 +36,8 @@ public static class InfrastructureServiceCollectionExtensions
         services.AddScoped<IPlayerService, PlayerService>();
         services.AddScoped<IRoleService, RoleService>();
 
+        services.AddHostedService<RoleInitializer>();
+        
         return services;
     }
 }

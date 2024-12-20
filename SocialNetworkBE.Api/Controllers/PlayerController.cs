@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using SocialNetworkBE.Application;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SocialNetworkBE.Application.DTOs;
 using SocialNetworkBE.Application.Extensions;
 using SocialNetworkBE.Application.Interfaces;
@@ -28,11 +28,12 @@ public class PlayerController : ControllerBase
         var result = await _playerService.RegisterPlayerAsync(createPlayerDto, password);
         return result.ToActionResult(); 
     }
-    
+    [Authorize(Roles = "Admin")]
     [HttpGet("getAllUsers")]
     public async Task<IActionResult> GetAllUsers()
     {
         var result = await _playerService.GetAllPlayersAsync();
         return result.ToActionResult();
     }
+    
 }
